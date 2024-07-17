@@ -1,0 +1,26 @@
+import java.io.File;
+
+class emptyFileException extends Exception
+{
+    public emptyFileException(String message)
+    {
+        super(message);
+    }
+}
+
+
+class Main
+{
+    public static void main (String[] args) {
+        File file=new File("hell.txt");
+        try {
+          if(file.length()==0){
+              throw new emptyFileException("File is empty");
+            }
+        } catch(emptyFileException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }
+}
