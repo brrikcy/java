@@ -1,0 +1,31 @@
+import java.io.File;
+
+class FileNotFoundException extends Exception
+{
+    public FileNotFoundException(String message)
+    {
+        super(message);
+    }
+}
+
+
+
+
+class Main
+{
+    public static void readFile(String filename) throws FileNotFoundException{
+        File file=new File(filename);
+        if(!file.exists()){
+            throw new FileNotFoundException("error!! " +filename + " is not found.");
+        }
+    }
+    public static void main (String[] args) {
+        try {
+          readFile("grhjr.txt");
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }
+}
