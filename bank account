@@ -1,0 +1,65 @@
+class BankAccount{
+    private double balance;
+    public BankAccount(double balance){
+        this.balance=balance;
+    }
+    public void deposit(double amount){
+        balance+=amount;
+        System.out.println("Deposited "+amount );
+    }
+    public void withdraw(double amount){
+        if(balance>amount){
+            balance-=amount;
+            System.out.println("Withdrew" +amount);
+        }
+    }
+    public double getBalance(){
+        return(balance);
+    }
+}
+
+class depositThread extends Thread{
+    private BankAccount account;
+    private double amount;
+    public depositThread(BankAccount account,double amount){
+        this.account=account;
+        this.amount=amount;
+    }
+    public void run(){
+        account.deposit(amount);
+    }
+}
+
+class withdrawThread extends Thread{
+    private BankAccount account;
+    private double amount;
+    public withdrawThread(BankAccount account,double amount){
+        this.account=account;
+        this.amount=amount;
+    }
+    public void run(){
+        account.withdraw(amount);
+    }
+}
+
+class Main{
+    public static void main (String[] args) {
+        BankAccount account=new BankAccount(1000.0);
+        depositThread t1=new depositThread(account,2000.0);
+        withdrawThread t2=new withdrawThread(account,340.4);
+        
+        t1.start();
+        t2.start();
+        
+        try {
+            t1.join();
+            t2.join();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        System.out.println("balance is " +account.getBalance());
+        
+        
+    }
+}
