@@ -1,0 +1,42 @@
+import java.io.File;
+
+class VowelsNotFoundException extends Exception
+{
+    public VowelsNotFoundException(String message)
+    {
+        super(message);
+    }
+}
+
+
+
+
+class Main
+{
+    public static void readText(String text) throws VowelsNotFoundException{
+        char[] vowels={'a','e','i','o','u'};
+        text=text.toLowerCase();
+        boolean hasVowel=false;
+        for(int i=0;i<5;i++){
+            for(int j=0;j<text.length();j++){
+                if(vowels[i]==text.charAt(j)){
+                    hasVowel=true;
+                    break;
+                }
+            }
+        }
+        if(hasVowel==false){
+            throw new VowelsNotFoundException("Error! No vowel found in "+text);
+        }
+        System.out.println("Vowel found!!");
+    }
+    public static void main (String[] args) {
+        try {
+          readText("nhnhnhnhnhnne");
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }
+}
