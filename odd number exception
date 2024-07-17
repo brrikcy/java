@@ -1,0 +1,31 @@
+import java.io.File;
+
+class OddNumberException extends Exception
+{
+    public OddNumberException(String message)
+    {
+        super(message);
+    }
+}
+
+
+
+
+class Main
+{
+    public static void readInt(int n) throws OddNumberException{
+        int num=n;
+        if(num%2!=0){
+            throw new OddNumberException("error! " +num + " is odd.");
+        }
+    }
+    public static void main (String[] args) {
+        try {
+          readInt(31);
+        } catch(OddNumberException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }
+}
